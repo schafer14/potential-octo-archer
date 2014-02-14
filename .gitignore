@@ -12,6 +12,6 @@ logs
 results
 
 npm-debug.log
-node_modules
+
 migrations/db.conf.js 
 migrations

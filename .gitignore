@@ -13,6 +13,8 @@ results
 
 npm-debug.log
 node_modules
-migrations/db.conf.js 
 migrations
+migrations/db.conf.js 
+
+lib/conf.js
 

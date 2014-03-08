@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Blkswan by schafer14</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Blkswan</h1>
+        <h2>NPM package for easy migrations using mysql. </h2>
+        <a href="https://github.com/schafer14/potential-octo-archer" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h2>
+<a name="npm-package-for-easy-migrations-using-mysql" class="anchor" href="#npm-package-for-easy-migrations-using-mysql"><span class="octicon octicon-link"></span></a>NPM package for easy migrations using mysql.</h2>
+
+<h4>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h4>
+
+<ul>
+<li>Provide easy command line migration file generation</li>
+<li>MySql syntax mapper for migration files</li>
+<li>Auto migrations for migrating: up, all, down, and reset</li>
+<li>Migration tracker for keeping track of migration</li>
+</ul><h4>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h4>
+
+<p>Make sure blkswan is installed globally</p>
+
+<pre><code>$ sudo npm install -g blkswan
+</code></pre>
+
+<p>Run all commands from the root directory of your project</p>
+
+<p>Ensure mysql package is installed for acessing the database</p>
+
+<pre><code>$ npm install mysql
+</code></pre>
+
+<h4>
+<a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h4>
+
+<p>This step is optional. It will setup a migrations folder and add config files to your .gitignore.</p>
+
+<pre><code>$ blkswan migrate:setup
+</code></pre>
+
+<p>Now go into migrations/db.conf.js and enter config variables.</p>
+
+<h4>
+<a name="install-1" class="anchor" href="#install-1"><span class="octicon octicon-link"></span></a>Install</h4>
+
+<pre><code>$ blkswan migrate:install
+</code></pre>
+
+<p>This will add a migrations table to your database</p>
+
+<h4>
+<a name="create-migrations" class="anchor" href="#create-migrations"><span class="octicon octicon-link"></span></a>Create migrations</h4>
+
+<pre><code>$ blkswan migrate:create migration_name
+</code></pre>
+
+<p>This will create a file in your migrations directory with boilerplate code</p>
+
+<p>-- Or --</p>
+
+<pre><code>$ blkswan migrate:create create_users_books_table
+</code></pre>
+
+<p>This will create code for creating a users_books table</p>
+
+<p>You can also give params</p>
+
+<pre><code>$ blkswan migrate:create create_book_table name author --int=num_pages publisher --int=year_published
+</code></pre>
+
+<h4>
+<a name="running-migrations" class="anchor" href="#running-migrations"><span class="octicon octicon-link"></span></a>Running migrations</h4>
+
+<p>Running all migrations is default behaviour</p>
+
+<pre><code>$ blkswan migrate
+</code></pre>
+
+<p>Other options include</p>
+
+<pre><code>$ blkswan migrate:one
+$ blkswan migrate:reset
+$ blkswan migrate:down
+</code></pre>
+
+<p>One: migrates the next single migration</p>
+
+<p>Reset: rolls back all migrations</p>
+
+<p>Down: rolls back the last migration</p>
+
+<h2>
+<a name="migration-files" class="anchor" href="#migration-files"><span class="octicon octicon-link"></span></a>Migration Files</h2>
+
+<p>Map json objects to mysql queries</p>
+
+<h4>
+<a name="creating-a-table" class="anchor" href="#creating-a-table"><span class="octicon octicon-link"></span></a>Creating a table</h4>
+
+<p>General syntax</p>
+
+<pre><code>exports.up = {
+    "table_name":{
+        "id":{"type":"increments"},
+        "email":{"type":"string", "null":false, "length":"10"},
+        "level":{"type":"double", "default":"1.618"}, 
+        "exact_level":{"type":"double", "length":"9", "decimal":"4"},
+        "my_index":{"type":"index", "column":"level"},
+        "created_at":{"type":"timestamp","time":"NOW"}
+    }
+}
+</code></pre>
+
+<h6>
+<a name="available-types" class="anchor" href="#available-types"><span class="octicon octicon-link"></span></a>Available types</h6>
+
+<ul>
+<li>String or String defaults to length of 256</li>
+<li>Increments: creates a auto incrmenting table with a primary id</li>
+<li>Int or Integer defaults to length of 10</li>
+<li>Small one digit int</li>
+<li>Longtext</li>
+<li>Datetime</li>
+<li>Timestamp</li>
+<li>Date</li>
+<li>Double with length and decimal params defaults to double(7,4)</li>
+<li>Index</li>
+</ul><h6>
+<a name="other-params" class="anchor" href="#other-params"><span class="octicon octicon-link"></span></a>Other params</h6>
+
+<ul>
+<li>"Unsigned":true</li>
+<li>"Null":false</li>
+<li>"Default":"blkswan"</li>
+<li>"Unique":true</li>
+<li>"Unsighed":true</li>
+</ul><h4>
+<a name="drop-table-syntax" class="anchor" href="#drop-table-syntax"><span class="octicon octicon-link"></span></a>Drop table syntax</h4>
+
+<pre><code>exports.down = {"drop":"table_name"}
+</code></pre>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/schafer14/potential-octo-archer/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/schafer14/potential-octo-archer/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/schafer14/potential-octo-archer"></a> is maintained by <a href="https://github.com/schafer14">schafer14</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>

@@ -21,12 +21,7 @@
   "bugs": {
     "url": "https://github.com/schafer14/potential-octo-archer/issues"
   },
-  "bin": { 
-    "blkswan" : "lib/blkswan.js", 
-    "blkswan" : "lib/create.js", 
-    "blkswan" : "lib/install.js", 
-    "blkswan" : "lib/migrate.js"
-  },
+  "bin": { "blkswan" : "lib/blkswan.js" },
   "dependencies": {
     "minimist": "*",
     "mysql": "*"

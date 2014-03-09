@@ -1,6 +1,6 @@
 {
   "name": "blkswan",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "MySQL migration generator",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
     "type": "git",
     "url": "https://github.com/schafer14/potential-octo-archer"
   },
+  "homepage":"http://schafer14.github.io/potential-octo-archer/",
   "keywords": [
     "MySQL",
     "generator",

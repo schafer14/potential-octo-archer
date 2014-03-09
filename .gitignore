@@ -18,3 +18,5 @@ migrations
 lib/conf.js
 
 migrations/db.conf.js 
+
+migrations/db.conf.js 

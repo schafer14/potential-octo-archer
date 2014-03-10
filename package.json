@@ -1,6 +1,6 @@
 {
   "name": "blkswan",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "MySQL migration generator",
   "main": "index.js",
   "scripts": {
